@@ -26,7 +26,7 @@ RSA公钥/私钥，由OpenSSL生成的公钥/私钥字符串，建议密钥长�
 配置应用，Geek/AppProperties.cs文件:
 - AppID，应用标识。
 - GeekPublicKey，GeekPayment平台分配的公钥，Base64格式。
-- PrivateKey，应用的私钥，base64格式。
+- PrivateKey，应用的私钥，Base64格式。
 
 配置GeekPayment API，Geek/GeekPaymentProperties.cs文件：
 - Scheme，传输协议
