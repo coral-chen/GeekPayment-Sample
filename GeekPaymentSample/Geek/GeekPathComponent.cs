@@ -1,16 +1,10 @@
-using GeekPaymentSample.Geek;
-
-namespace GeekPaymentSample.Geek.Payment
+namespace GeekPaymentSample.Geek
 {
-    public class RetailPathComponents : PathComponents
+    public class GeekPathComponents : PathComponents
     {
-        private string pathPattern = "apps/{0}/retail_qr_orders/{1}";
+        protected string pathPattern;
 
-        public RetailPathComponents() {
-
-        } 
-
-        private RetailPathComponents(string pathPattern)
+        public GeekPathComponents(string pathPattern)
         {
             this.pathPattern = pathPattern;
         }
@@ -26,7 +20,7 @@ namespace GeekPaymentSample.Geek.Payment
             {
                 string[] tempVariables = new string[] {variables[0], variables.Length == 1 ? "": variables[1]};
                 string pathPatternTo = string.Format(pathPattern, tempVariables);
-                return new RetailPathComponents(pathPatternTo);
+                return new GeekPathComponents(pathPatternTo);
             }
             return this;
         }

@@ -12,7 +12,7 @@ namespace GeekPaymentSample.Geek.Payment
     /// <summary>
     /// 付款码渠道订单
     /// </summary>
-    public class GeekChannelRetailOrder : ChannelOrder
+    public class GeekRetailOrder : ChannelOrder
     {
         private GeekUriComponents uriComponent;
         private HttpClient httpClient;
@@ -20,7 +20,7 @@ namespace GeekPaymentSample.Geek.Payment
         private string notifyUrl;
         private string appId;
 
-        public GeekChannelRetailOrder(HttpClient httpClient, GeekUriComponents uriComponent, GeekSign geekSign, string notifyUrl, string appId)
+        public GeekRetailOrder(HttpClient httpClient, GeekUriComponents uriComponent, GeekSign geekSign, string notifyUrl, string appId)
         {
             this.uriComponent = uriComponent;
             this.httpClient = httpClient;

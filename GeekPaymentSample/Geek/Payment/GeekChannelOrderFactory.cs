@@ -20,10 +20,10 @@ namespace GeekPaymentSample.Geek.Payment
         /// <returns></returns>
         public ChannelOrder channelOrder()
         {
-            PathComponents pathComponent = new RetailPathComponents();
+            PathComponents pathComponent = new GeekPathComponents("/apps/{0}/retail_orders/{1}");
             GeekUriComponents uriComponent = new GeekUriComponents(GeekPaymentProperties.Scheme, GeekPaymentProperties.Host, pathComponent);
             
-            return new GeekChannelRetailOrder(httpClient, uriComponent, geekSign, AppProperties.NotifyUrl, AppProperties.AppID);
+            return new GeekRetailOrder(httpClient, uriComponent, geekSign, AppProperties.NotifyUrl, AppProperties.AppID);
         }
     }
 }
