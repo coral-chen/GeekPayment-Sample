@@ -20,7 +20,7 @@ namespace GeekPaymentSample.Geek.Payment
         private string notifyUrl;
         private string appId;
 
-        public GeekChannelRetailOrder(HttpClient httpClient, GeekUriComponents uriComponent, GeekSign geekSign, string notityUrl, string appId)
+        public GeekChannelRetailOrder(HttpClient httpClient, GeekUriComponents uriComponent, GeekSign geekSign, string notifyUrl, string appId)
         {
             this.uriComponent = uriComponent;
             this.httpClient = httpClient;
