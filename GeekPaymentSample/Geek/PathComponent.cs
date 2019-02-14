@@ -1,15 +1,8 @@
 namespace GeekPaymentSample.Geek
 {
-    public class PathComponent
+    public interface PathComponents
     {
-        public string getPath()
-        {
-            return "";
-        }
-
-        public PathComponent expend(params string[] variables)
-        {
-            return new PathComponent();
-        }
+        string GetPath();
+        PathComponents Expand(params string[] variables);
     }
 }

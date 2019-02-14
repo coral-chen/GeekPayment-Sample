@@ -8,8 +8,6 @@ namespace GeekPaymentSample.Geek.Payment
         private static readonly HttpClient httpClient;
         private static readonly GeekSign geekSign;
 
-        private GeekPaymentUriComponent uriComponent;
-
         static GeekChannelOrderFactory()
         {
             httpClient = new HttpClient();
@@ -22,7 +20,10 @@ namespace GeekPaymentSample.Geek.Payment
         /// <returns></returns>
         public ChannelOrder channelOrder()
         {
-            return new GeekChannelRetailOrder(httpClient, uriComponent, geekSign, AppProperties.NotifyUrl);
+            PathComponents pathComponent = new RetailPathComponents();
+            GeekUriComponents uriComponent = new GeekUriComponents(GeekPaymentProperties.Scheme, GeekPaymentProperties.Host, pathComponent);
+            
+            return new GeekChannelRetailOrder(httpClient, uriComponent, geekSign, AppProperties.NotifyUrl, AppProperties.AppID);
         }
     }
 }

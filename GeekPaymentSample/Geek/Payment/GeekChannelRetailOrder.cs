@@ -14,19 +14,19 @@ namespace GeekPaymentSample.Geek.Payment
     /// </summary>
     public class GeekChannelRetailOrder : ChannelOrder
     {
-        private const string pathPattern = "apps/{0}/retail_qr_orders/{1}"; 
-
-        private GeekPaymentUriComponent uriComponent;
+        private GeekUriComponents uriComponent;
         private HttpClient httpClient;
         private GeekSign geekSign;
         private string notifyUrl;
+        private string appId;
 
-        public GeekChannelRetailOrder(HttpClient httpClient, GeekPaymentUriComponent uriComponent, GeekSign geekSign, string notityUrl)
+        public GeekChannelRetailOrder(HttpClient httpClient, GeekUriComponents uriComponent, GeekSign geekSign, string notityUrl, string appId)
         {
             this.uriComponent = uriComponent;
             this.httpClient = httpClient;
             this.geekSign = geekSign;
             this.notifyUrl = notifyUrl;
+            this.appId = appId;
         }
 
         public OrderInfo Create(OrderCreateInfo orderCreateInfo, string authCode, string deviceId)
@@ -34,10 +34,13 @@ namespace GeekPaymentSample.Geek.Payment
             try 
             {
                 JObject requestContent = GenerateRequestContent(orderCreateInfo, authCode, deviceId);
-
+                uriComponent = uriComponent.Expand(orderCreateInfo.MchOrderId);
                 String nonceStr = RandomStringUtils.Random(10);
-                String url = uriComponent.ToUriString();
-                String sign = geekSign.Sign(requestContent, nonceStr, url);
+
+                String fullPath = uriComponent.ToUriString();
+                String sign = geekSign.Sign(requestContent, nonceStr, fullPath);
+
+                String url = uriComponent.QueryParams(nonceStr, sign, GeekSign.SignType).ToUriString();
 
                 String serializeRequestContent = requestContent.ToString();
                 HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Put, url);
