@@ -79,6 +79,11 @@ namespace GeekPaymentSample.Geek
 
         private string getQuery()
         {
+            if(this.queryParams == null)
+            {
+                return null;
+            }
+
             StringBuilder queryBuilder = new StringBuilder();
             foreach (var item in queryParams)
             {

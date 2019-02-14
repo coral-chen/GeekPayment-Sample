@@ -34,7 +34,7 @@ namespace GeekPaymentSample.Geek.Payment
             try 
             {
                 JObject requestContent = GenerateRequestContent(orderCreateInfo, authCode, deviceId);
-                uriComponent = uriComponent.Expand(orderCreateInfo.MchOrderId);
+                uriComponent = uriComponent.Expand(appId, orderCreateInfo.MchOrderId);
                 String nonceStr = RandomStringUtils.Random(10);
 
                 String fullPath = uriComponent.ToUriString();
@@ -47,8 +47,12 @@ namespace GeekPaymentSample.Geek.Payment
                 requestMessage.Content = new StringContent(serializeRequestContent, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage responseMessage = httpClient.SendAsync(requestMessage).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return DeserializeRepsonseContent(responseMessage.Content.ReadAsStringAsync().Result);
+                }
                 
-                return DeserializeRepsonseContent(responseMessage.Content.ReadAsStringAsync().Result);
+                throw new ApplicationException();
             }
             catch (HttpRequestException e)
             {

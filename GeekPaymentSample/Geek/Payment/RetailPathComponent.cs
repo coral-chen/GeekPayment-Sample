@@ -22,8 +22,13 @@ namespace GeekPaymentSample.Geek.Payment
 
         public PathComponents Expand(params string[] variables)
         {
-            string pathPatternTo = string.Format(pathPattern, variables);
-            return new RetailPathComponents(pathPatternTo);
+            if (variables.Length > 0)
+            {
+                string[] tempVariables = new string[] {variables[0], variables.Length == 1 ? "": variables[1]};
+                string pathPatternTo = string.Format(pathPattern, tempVariables);
+                return new RetailPathComponents(pathPatternTo);
+            }
+            return this;
         }
     }
 }
