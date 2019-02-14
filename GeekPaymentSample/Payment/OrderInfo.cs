@@ -66,7 +66,7 @@ namespace GeekPaymentSample.Payment
         /// 订单创建时间
         /// </summary>
         /// <value></value>
-        public string CreatTime {set; get;}
+        public string CreateTime {set; get;}
 
         /// <summary>
         /// 订单支付时间

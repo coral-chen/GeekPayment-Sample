@@ -1,23 +1,28 @@
 using GeekPaymentSample.Payment;
+using System.Net.Http;
 
 namespace GeekPaymentSample.Geek.Payment
 {
     public class GeekChannelOrderFactory
     {
-        /// <summary>
-        /// 示例化付款码订单
-        /// </summary>
-        /// <param name="orderCreateInfo">下单信息</param>
-        /// <param name="authCode">付款码</param>
-        /// <returns></returns>
-        public ChannelOrder channelOrder(OrderCreateInfo orderCreateInfo, string authCode)
-        {
-            
-            return null;
-        }
-        
-        // OrderInfo Create(OrderCreateInfo orderCreateInfo, string notifyUrl, string deviceId, string authCode);
+        private static readonly HttpClient httpClient;
+        private static readonly GeekSign geekSign;
 
-        // OrderPayInfo Create(OrderCreateInfo orderCreateInfo, string notifyUrl, string deviceId);
+        private GeekPaymentUriComponent uriComponent;
+
+        static GeekChannelOrderFactory()
+        {
+            httpClient = new HttpClient();
+            geekSign = new GeekSign(AppProperties.GeekPublicKey, AppProperties.PrivateKey);
+        }
+
+        /// <summary>
+        /// 实例化付款码订单
+        /// </summary>
+        /// <returns></returns>
+        public ChannelOrder channelOrder()
+        {
+            return new GeekChannelRetailOrder(httpClient, uriComponent, geekSign, AppProperties.NotifyUrl);
+        }
     }
 }
