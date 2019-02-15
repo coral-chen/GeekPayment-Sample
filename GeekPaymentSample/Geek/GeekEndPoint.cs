@@ -19,7 +19,7 @@ namespace GeekPaymentSample.Geek
         public JObject Get(string url)
         {
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, url);
-            return send(requestMessage);
+            return Send(requestMessage);
         }
 
         public JObject Put(string url, JObject requestBody)
@@ -28,10 +28,10 @@ namespace GeekPaymentSample.Geek
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Put, url);
             requestMessage.Content = new StringContent(content, Encoding.UTF8, "applicatiion/json");
 
-            return send(requestMessage);
+            return Send(requestMessage);
         }
 
-        private JObject send(HttpRequestMessage requestMessage)
+        private JObject Send(HttpRequestMessage requestMessage)
         {
             try
             {
