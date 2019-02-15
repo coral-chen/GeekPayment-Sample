@@ -15,6 +15,7 @@ namespace GeekPaymentSample.Geek.Payment
             orderInfo.PayUrl = contentData["pay_url"].ToString();
             orderInfo.ResultCode = contentData["result_code"].ToString();
             orderInfo.QRCode = contentData["qr_code"].ToString();
+            orderInfo.CodeImgUrl = contentData["code_img_url"].ToString();
 
             return orderInfo;
         }

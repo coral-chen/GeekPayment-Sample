@@ -3,14 +3,14 @@ using GeekPaymentSample.Payment;
 
 namespace GeekPaymentSample.Geek.Payment
 {
-    public class GeekChannelOrderQuery : ChannelOrderQuery
+    public class GeekOrderQuery : ChannelOrderQuery
     {
         private GeekUriComponents uriComponents;
         private GeekEndPoint geekEndPoint;
         private HttpResponseParser<OrderInfo> responseParser;
         private string appId;
 
-        public GeekChannelOrderQuery(GeekUriComponents uriComponents, GeekEndPoint geekEndPoint, HttpResponseParser<OrderInfo> responseParser, string appId)
+        public GeekOrderQuery(GeekUriComponents uriComponents, GeekEndPoint geekEndPoint, HttpResponseParser<OrderInfo> responseParser, string appId)
         {
             this.uriComponents = uriComponents;
             this.geekEndPoint = geekEndPoint;

@@ -8,7 +8,7 @@ using GeekPaymentSample.Payment;
 
 namespace GeekPaymentSample.Tests
 {
-    public class GeekChannelOrderQueryTest
+    public class GeekOrderQueryTest
     {
         [Fact]
         public void Test()
@@ -16,7 +16,7 @@ namespace GeekPaymentSample.Tests
             //创建订单
             OrderInfo orderInfo = CreateOrder();
             
-            GeekChannelOrderQuery query = GetQuery();
+            GeekOrderQuery query = GetQuery();
 
             OrderInfo existOrderInfo = query.Find(orderInfo.MchOrderId);
 
@@ -37,7 +37,7 @@ namespace GeekPaymentSample.Tests
             Console.WriteLine(JsonConvert.SerializeObject(existOrderInfo));
         }
 
-        private GeekChannelOrderQuery GetQuery()
+        private GeekOrderQuery GetQuery()
         {
             
             GeekSign geekSign = new GeekSign(AppProperties.GeekPublicKey, AppProperties.PrivateKey);
@@ -50,7 +50,7 @@ namespace GeekPaymentSample.Tests
 
             HttpResponseParser<OrderInfo> responseParser = new OrderInfoResponseParser();
 
-            return new GeekChannelOrderQuery(uriComponents, geekEndPoint, responseParser, AppProperties.AppID);
+            return new GeekOrderQuery(uriComponents, geekEndPoint, responseParser, AppProperties.AppID);
         }
 
         private OrderInfo CreateOrder()

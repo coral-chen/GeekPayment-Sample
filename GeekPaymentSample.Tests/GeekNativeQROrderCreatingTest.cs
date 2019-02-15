@@ -34,6 +34,7 @@ namespace GeekPaymentSample.Tests
             Assert.NotEmpty(orderInfo.PayUrl);
             Assert.NotEmpty(orderInfo.ResultCode);
             Assert.NotEmpty(orderInfo.QRCode);
+            Assert.NotEmpty(orderInfo.CodeImgUrl);
 
             Console.WriteLine(JsonConvert.SerializeObject(orderInfo));
         }

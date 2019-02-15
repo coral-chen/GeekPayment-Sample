@@ -38,6 +38,10 @@ namespace GeekPaymentSample.Payment
         /// <value></value>
         public string QRCode {set; get;}
 
-        //TODO: code_img_url 渠道支付的二维码图片
+        /// <summary>
+        /// 渠道支付的二维码图片URL
+        /// </summary>
+        /// <value></value>
+        public string CodeImgUrl {set; get;}
     }
 }
