@@ -50,16 +50,6 @@ namespace GeekPaymentSample.Geek
             return this;
         }
 
-        // public GeekUriComponents QueryParams(string nonceStr, string sign, string signType)
-        // {
-        //     this.queryParams = new Dictionary<string, string>();
-        //     queryParams.Add("sign_type", signType);
-        //     queryParams.Add("nonce_str", nonceStr);
-        //     queryParams.Add("sign", sign);
-
-        //     return this;
-        // }
-
         private string GetFullPath()
         {
             StringBuilder uriBuilder = new StringBuilder();

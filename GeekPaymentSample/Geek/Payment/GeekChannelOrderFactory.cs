@@ -41,6 +41,18 @@ namespace GeekPaymentSample.Geek.Payment
             return new GeekRetailQROrder(geekEndPoint, GeekUriComponents(pathComponents, geekSign), responseParser, AppProperties.NotifyUrl, AppProperties.AppID);
         }
 
+        /// <summary>
+        /// 实例化原生二维码订单
+        /// </summary>
+        /// <returns></returns>
+        public ToPayNativeChannelOrder NativeQROrder()
+        {
+            PathComponents pathComponents = new GeekPathComponents("/apps/{0}/native_qr_orders/{1}");
+            HttpResponseParser<ToPayNativeOrderInfo> responseParser = new ToPayNativeOrderInfoResponseParser();
+
+            return new GeekNativeQROrder(geekEndPoint, GeekUriComponents(pathComponents, geekSign), responseParser, AppProperties.ReturnUrl, AppProperties.NotifyUrl, AppProperties.AppID);
+        }
+
 
         private GeekUriComponents GeekUriComponents(PathComponents pathComponents, GeekSign geekSign)
         {

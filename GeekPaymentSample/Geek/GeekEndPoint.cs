@@ -43,7 +43,7 @@ namespace GeekPaymentSample.Geek
                     JObject contentData = (JObject)contentJson["data"];
                     string contentSign = contentJson["sign"].ToString();
 
-                    if (geekSign.CheckSign(contentData, contentSign))
+                    if (contentData["return_code"].ToString().Contains("SUCCESS") && geekSign.CheckSign(contentData, contentSign))
                     {
                         return contentData;
                     }   
