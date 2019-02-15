@@ -16,7 +16,12 @@ namespace GeekPaymentSample.Geek
         private RSA2CheckSignAlgorithm checkAlgorithm;
         private RSA2SignAlgorithm signAlgorithm;
 
-        public const string SignType = "RSA2";
+        private const string signType = "RSA2";
+
+        public string SignType
+        {
+            get => signType;
+        }
 
         public GeekSign(string publicKey, string privateKey)
         {
@@ -26,8 +31,22 @@ namespace GeekPaymentSample.Geek
 
         public string Sign(JObject data, string nonceStr, string url)
         {
-            data.Add(new JProperty("sign_type", SignType));
+            if (data.ContainsKey("sign_type"))
+            {
+                data.Remove("sign_type");
+            }
+            data.Add(new JProperty("sign_type", signType));
+            
+            if (data.ContainsKey("url"))
+            {
+                data.Remove("url");
+            }
             data.Add(new JProperty("url", url));
+
+            if (data.ContainsKey("nonce_str"))
+            {
+                data.Remove("nonce_str");
+            }
             data.Add(new JProperty("nonce_str",  nonceStr));
             
             return signAlgorithm.Sign(data.ToString());

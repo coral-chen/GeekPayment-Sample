@@ -2,6 +2,6 @@ namespace GeekPaymentSample.Payment
 {
     public interface ToPayChannelOrder
     {
-         ToPayOrderInfo create();
+         ToPayOrderInfo Create(OrderCreateInfo orderCreateInfo, string deviceId);
     }
 }

@@ -1,5 +1,7 @@
 using System.Text;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
+using GeekPaymentSample.Geek.Utils;
 
 namespace GeekPaymentSample.Geek
 {
@@ -8,41 +10,57 @@ namespace GeekPaymentSample.Geek
         private string scheme;
         private string host;
         private PathComponents pathComponent;
+        private GeekSign geekSign;
 
         private Dictionary<string, string> queryParams;
 
-        public GeekUriComponents(string scheme, string host, PathComponents pathComponent) 
+        public GeekUriComponents(string scheme, string host, PathComponents pathComponent, GeekSign geekSign) 
         {
             this.scheme = scheme;
             this.host = host;
             this.pathComponent = pathComponent;
+            this.geekSign = geekSign;
         }
 
-        private GeekUriComponents(string scheme, string host, PathComponents pathComponent, Dictionary<string, string> queryParams)
+        private GeekUriComponents InstanceOf(PathComponents pathComponent, Dictionary<string, string> queryParams)
         {
-            this.scheme = scheme;
-            this.host = host;
-            this.pathComponent = pathComponent;
-            this.queryParams = queryParams;
+            GeekUriComponents uriComponents = new GeekUriComponents(this.scheme, this.host, pathComponent, this.geekSign);
+            uriComponents.queryParams = queryParams;
+
+            return uriComponents;
         }
 
         public GeekUriComponents Expand(params string[] uriVariableValues)
         {
             PathComponents pathTo = pathComponent.Expand(uriVariableValues);
-            return new GeekUriComponents(scheme, host, pathTo, queryParams);
+            return InstanceOf(pathTo, queryParams);
         }
 
-        public GeekUriComponents QueryParams(string nonceStr, string sign, string signType)
+        public GeekUriComponents Sign(JObject data)
         {
+            string nonceStr = RandomStringUtils.Random(10);
+
+            string sign = geekSign.Sign(data, nonceStr, GetFullPath());
+
             this.queryParams = new Dictionary<string, string>();
-            queryParams.Add("sign_type", signType);
+            queryParams.Add("sign_type", geekSign.SignType);
             queryParams.Add("nonce_str", nonceStr);
             queryParams.Add("sign", sign);
 
             return this;
         }
 
-        public string ToUriString()
+        // public GeekUriComponents QueryParams(string nonceStr, string sign, string signType)
+        // {
+        //     this.queryParams = new Dictionary<string, string>();
+        //     queryParams.Add("sign_type", signType);
+        //     queryParams.Add("nonce_str", nonceStr);
+        //     queryParams.Add("sign", sign);
+
+        //     return this;
+        // }
+
+        private string GetFullPath()
         {
             StringBuilder uriBuilder = new StringBuilder();
 
@@ -66,6 +84,13 @@ namespace GeekPaymentSample.Geek
                 }
                 uriBuilder.Append(path);
             }
+
+            return uriBuilder.ToString();
+        }
+
+        public string ToUriString()
+        {
+            StringBuilder uriBuilder = new StringBuilder(GetFullPath());
 
             string query = getQuery();
             if (query != null)

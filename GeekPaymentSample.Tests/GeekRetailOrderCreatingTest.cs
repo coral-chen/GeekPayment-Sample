@@ -7,10 +7,10 @@ using GeekPaymentSample.Geek.Payment;
 
 namespace GeekPaymentSample.Tests
 {
-    public class GeekChannelOrderCreatingTest
+    public class GeekRetailOrderCreatingTest
     {
         private GeekChannelOrderFactory geekChannelOrderFactory;
-        public GeekChannelOrderCreatingTest() {
+        public GeekRetailOrderCreatingTest() {
             geekChannelOrderFactory = new GeekChannelOrderFactory();
         }
 
@@ -27,7 +27,7 @@ namespace GeekPaymentSample.Tests
             
             String deviceId = "111";
 
-            ChannelOrder channelOrder = geekChannelOrderFactory.channelOrder();
+            ChannelOrder channelOrder = geekChannelOrderFactory.RetailOrder();
             OrderInfo orderInfo = channelOrder.Create(orderCreateInfo, authCode, deviceId);
 
             Assert.NotEmpty(orderInfo.MchSerialNo);
