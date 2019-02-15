@@ -23,9 +23,9 @@ namespace GeekPaymentSample.Tests
             orderCreateInfo.Price = 12300;
             orderCreateInfo.Expire = "10m";
             
-            String authCode = "284896288107264920";
+            string authCode = "284896288107264920";
             
-            String deviceId = "111";
+            string deviceId = "111";
 
             ChannelOrder channelOrder = geekChannelOrderFactory.RetailOrder();
             OrderInfo orderInfo = channelOrder.Create(orderCreateInfo, authCode, deviceId);

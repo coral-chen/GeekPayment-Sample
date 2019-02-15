@@ -37,5 +37,7 @@ namespace GeekPaymentSample.Payment
         /// </summary>
         /// <value></value>
         public string QRCode {set; get;}
+
+        //TODO: code_img_url 渠道支付的二维码图片
     }
 }
