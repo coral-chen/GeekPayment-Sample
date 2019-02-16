@@ -31,6 +31,12 @@ namespace GeekPaymentSample.Geek
             return Send(requestMessage);
         }
 
+        public JObject Delete(string url)
+        {
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Delete, url);
+            return Send(requestMessage);
+        }
+
         private JObject Send(HttpRequestMessage requestMessage)
         {
             try
