@@ -42,6 +42,18 @@ namespace GeekPaymentSample.Geek.Payment
         }
 
         /// <summary>
+        /// 实例化聚合下单
+        /// </summary>
+        /// <returns></returns>
+        public ToPayAggregateChannelOrder QROrder()
+        {
+            PathComponents pathComponents = new GeekPathComponents("apps/{0}/qr_orders/{1}");
+            HttpResponseParser<ToPayOrderInfo> responseParser = new ToPayOrderInfoResponseParser();
+
+            return new GeekAggregateOrder(geekEndPoint, GeekUriComponents(pathComponents, geekSign), responseParser, AppProperties.AppID, AppProperties.ReturnUrl, AppProperties.NotifyUrl);
+        }
+
+        /// <summary>
         /// 实例化原生二维码订单
         /// </summary>
         /// <returns></returns>
