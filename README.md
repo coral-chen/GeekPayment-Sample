@@ -13,8 +13,8 @@ GeekPayment API对每个请求数据验签。应用生成RSA公钥/私钥，将�
 GeekPayment API对每个返回数据添加数字签名，应用可对返回数据验签。GeekPayment平台分配应用一个PEM格式的RSA公钥，应用使用该公钥验签。
 
 RSA公钥/私钥，由OpenSSL生成的公钥/私钥字符串，建议密钥长度2048位。  
-签名算法是SHA256WithRSA，签名字符串是Base64格式，使用url safe模式。
-签名的数据，需要按照字母排序。
+签名算法是SHA256WithRSA，签名字符串是Base64格式，使用url safe模式。  
+签名的数据，需要按照字母排序。  
 示例中的私钥格式是PKCS8。
 
 ## 运行
