@@ -1,6 +1,11 @@
 using GeekPaymentSample.Geek.Utils;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
+using System.Collections.Generic;
+using System.Collections;
+using System.Reflection;
 using System.Text;
 using System.IO;
 using System.Security.Cryptography;
@@ -17,6 +22,7 @@ namespace GeekPaymentSample.Geek
         private RSA2SignAlgorithm signAlgorithm;
 
         private const string signType = "RSA2";
+        private static readonly char[] padding = { '=' };
 
         public string SignType
         {
@@ -29,6 +35,13 @@ namespace GeekPaymentSample.Geek
             this.checkAlgorithm = new RSA2CheckSignAlgorithm(ClearComment(publicKey));
         }
 
+        /// <summary>
+        /// 签名  签名字符串base64编码，使用url safe模式
+        /// </summary>
+        /// <param name="data">待签名数据</param>
+        /// <param name="nonceStr">随机数</param>
+        /// <param name="url">待签名数据的请求路径</param>
+        /// <returns></returns>
         public string Sign(JObject data, string nonceStr, string url)
         {
             if (data.ContainsKey("sign_type"))
@@ -49,12 +62,33 @@ namespace GeekPaymentSample.Geek
             }
             data.Add(new JProperty("nonce_str",  nonceStr));
             
-            return signAlgorithm.Sign(data.ToString());
+            string toSignStr = JObjectSort.Sort(data).ToString(Formatting.None);
+            string signStr = signAlgorithm.Sign(toSignStr);
+            return signStr.TrimEnd(padding).Replace('+', '-').Replace('/', '_');
         }
 
-        public bool CheckSign(JObject data, string sign)
+        /// <summary>
+        /// 验签
+        /// </summary>
+        /// <param name="data">待验证数据</param>
+        /// <param name="sign">签名</param>
+        /// <param name="url">待验证数据的请求路径</param>
+        /// <returns></returns>
+        public bool CheckSign(JObject data, string sign, string url)
         {
-            return checkAlgorithm.CheckSign(data.ToString(), sign);
+            if (data.ContainsKey("url"))
+            {
+                data.Remove("url");
+            }
+            data.Add(new JProperty("url", url));
+
+            sign = sign.Replace('_', '/').Replace('-', '+');
+            switch(sign.Length % 4) {
+                case 2: sign += "=="; break;
+                case 3: sign += "="; break;
+            }
+
+            return checkAlgorithm.CheckSign(JObjectSort.Sort(data).ToString(Formatting.None), sign);
         }
 
         private string ClearComment(string key)

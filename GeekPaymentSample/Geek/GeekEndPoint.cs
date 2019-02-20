@@ -1,7 +1,9 @@
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using System.Net.Http;
 using System;
 using System.Text;
+using GeekPaymentSample.Geek.Utils;
 
 namespace GeekPaymentSample.Geek
 {
@@ -24,9 +26,9 @@ namespace GeekPaymentSample.Geek
 
         public JObject Put(string url, JObject requestBody)
         {
-            String content = requestBody.ToString();
+            String content = JObjectSort.Sort(requestBody).ToString(Formatting.None);;
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Put, url);
-            requestMessage.Content = new StringContent(content, Encoding.UTF8, "applicatiion/json");
+            requestMessage.Content = new StringContent(content, Encoding.UTF8, "application/json");
 
             return Send(requestMessage);
         }
@@ -49,7 +51,9 @@ namespace GeekPaymentSample.Geek
                     JObject contentData = (JObject)contentJson["data"];
                     string contentSign = contentJson["sign"].ToString();
 
-                    if (contentData["return_code"].ToString().Contains("SUCCESS") && geekSign.CheckSign(contentData, contentSign))
+                    string fullPath = requestMessage.RequestUri.OriginalString.Substring(0, requestMessage.RequestUri.OriginalString.IndexOf("?"));
+                    
+                    if (contentData["return_code"].ToString().Contains("SUCCESS") && geekSign.CheckSign(new JObject(contentData), contentSign, fullPath))
                     {
                         return contentData;
                     }   
