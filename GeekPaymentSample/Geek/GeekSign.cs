@@ -10,6 +10,7 @@ using System.Text;
 using System.IO;
 using System.Security.Cryptography;
 using XC.RSAUtil;
+using Microsoft.Extensions.Logging;
 
 namespace GeekPaymentSample.Geek
 {
