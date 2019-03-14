@@ -26,7 +26,7 @@ namespace GeekPaymentSample.Geek.Payment
         {
             JObject requestBody = GenerateRequestContent(orderCreateInfo, channel);
 
-            string url = uriComponents.Expand(appId, orderCreateInfo.MchOrderId).Sign(new JObject(requestBody)).ToUriString();
+            string url = uriComponents.NativeQROrderUri().Expand(appId, orderCreateInfo.MchOrderId).Sign(new JObject(requestBody)).ToUriString();
 
             JObject contentData = geekEndPoint.Put(url, requestBody);
 

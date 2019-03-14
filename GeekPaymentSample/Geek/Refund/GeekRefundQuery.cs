@@ -21,7 +21,7 @@ namespace GeekPaymentSample.Geek.Refund
 
         public RefundInfo Find(string mchOrderId, string mchRefundId)
         {
-            string url = uriComponents.Expand(appId, mchOrderId, mchRefundId).Sign(new JObject()).ToUriString();
+            string url = uriComponents.RefundQueryUri().Expand(appId, mchOrderId, mchRefundId).Sign(new JObject()).ToUriString();
 
             JObject responseData = geekEndPoint.Get(url);
 

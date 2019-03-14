@@ -26,7 +26,7 @@ namespace GeekPaymentSample.Geek.Refund
             JObject requestBody = new JObject();
             requestBody.Add(new JProperty("amount", amount));
 
-            string url = uriComponents.Expand(appId, mchOrderId, mchRefundId).Sign(requestBody).ToUriString();
+            string url = uriComponents.RefundUri().Expand(appId, mchOrderId, mchRefundId).Sign(requestBody).ToUriString();
 
             JObject responseData = geekEndPoint.Put(url, requestBody);
 

@@ -43,8 +43,7 @@ namespace GeekPaymentSample.Tests
             HttpClient httpClient = new HttpClient();
             GeekEndPoint geekEndPoint = new GeekEndPoint(httpClient, geekSign);
 
-            PathComponents pathComponents = new GeekPathComponents("/apps/{0}/orders/{1}/refunds/{2}");
-            GeekUriComponents uriComponents = new GeekUriComponents(GeekPaymentProperties.Scheme, GeekPaymentProperties.Host, pathComponents, geekSign);
+            GeekUriComponents uriComponents = new GeekUriComponents(GeekPaymentProperties.Scheme, GeekPaymentProperties.Host, geekSign);
 
             HttpResponseParser<RefundInfo> responseParser = new RefundInfoResponseParser();
 

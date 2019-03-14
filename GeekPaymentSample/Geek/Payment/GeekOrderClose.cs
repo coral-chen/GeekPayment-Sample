@@ -20,7 +20,7 @@ namespace GeekPaymentSample.Geek.Payment
 
         public OrderInfo Close(string mchOrderId)
         {
-            string url = uriComponents.Expand(appId, mchOrderId).Sign(new JObject()).ToUriString();
+            string url = uriComponents.OrderCloseUri().Expand(appId, mchOrderId).Sign(new JObject()).ToUriString();
 
             JObject responseData = geekEndPoint.Delete(url);
 

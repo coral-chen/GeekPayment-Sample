@@ -15,12 +15,12 @@ namespace GeekPaymentSample.Geek.Payment
             orderInfo.Price = int.Parse(responseData["price"].ToString());
             orderInfo.TotalAmount = int.Parse(responseData["total_amount"].ToString());
             orderInfo.MchDiscount = int.Parse(responseData["mch_discount"].ToString());
-            orderInfo.PlatformDiscount = int.Parse(responseData["plateform_discount"].ToString());
+            orderInfo.PlatformDiscount = int.Parse(responseData["platform_discount"].ToString());
             orderInfo.PayAmount = int.Parse(responseData["pay_amount"].ToString());
             orderInfo.ToSettleAmount = int.Parse(responseData["to_settle_amount"].ToString());
             orderInfo.Channel = responseData["channel"].ToString();
             orderInfo.CreateTime = responseData["create_time"].ToString();
-            orderInfo.PayTime = responseData["pay_time"].ToString();
+            orderInfo.PayTime = responseData["pay_time"] == null ? "" : responseData["pay_time"].ToString();
             orderInfo.OrderStatus = responseData["order_status"].ToString();
 
             return orderInfo;

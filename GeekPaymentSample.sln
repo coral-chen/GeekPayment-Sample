@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekPaymentSample", "GeekPa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekPaymentSample.Tests", "GeekPaymentSample.Tests\GeekPaymentSample.Tests.csproj", "{14363C5F-9D02-4EFE-9682-C26C98611EDB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekPaymentSample.App", "GeekPaymentSample.App\GeekPaymentSample.App.csproj", "{658A63E0-A22D-4355-A5EE-086079F341D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,17 @@ Global
 		{14363C5F-9D02-4EFE-9682-C26C98611EDB}.Release|x64.Build.0 = Release|Any CPU
 		{14363C5F-9D02-4EFE-9682-C26C98611EDB}.Release|x86.ActiveCfg = Release|Any CPU
 		{14363C5F-9D02-4EFE-9682-C26C98611EDB}.Release|x86.Build.0 = Release|Any CPU
+		{658A63E0-A22D-4355-A5EE-086079F341D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{658A63E0-A22D-4355-A5EE-086079F341D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{658A63E0-A22D-4355-A5EE-086079F341D5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{658A63E0-A22D-4355-A5EE-086079F341D5}.Debug|x64.Build.0 = Debug|Any CPU
+		{658A63E0-A22D-4355-A5EE-086079F341D5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{658A63E0-A22D-4355-A5EE-086079F341D5}.Debug|x86.Build.0 = Debug|Any CPU
+		{658A63E0-A22D-4355-A5EE-086079F341D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{658A63E0-A22D-4355-A5EE-086079F341D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{658A63E0-A22D-4355-A5EE-086079F341D5}.Release|x64.ActiveCfg = Release|Any CPU
+		{658A63E0-A22D-4355-A5EE-086079F341D5}.Release|x64.Build.0 = Release|Any CPU
+		{658A63E0-A22D-4355-A5EE-086079F341D5}.Release|x86.ActiveCfg = Release|Any CPU
+		{658A63E0-A22D-4355-A5EE-086079F341D5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -32,7 +32,7 @@ namespace GeekPaymentSample.Geek.Payment
         {
             JObject requestContent = GenerateRequestContent(orderCreateInfo, authCode, deviceId);
             
-            String url = uriComponent.Expand(appId, orderCreateInfo.MchOrderId).Sign(new JObject(requestContent)).ToUriString();
+            String url = uriComponent.RetailOrderUri().Expand(appId, orderCreateInfo.MchOrderId).Sign(new JObject(requestContent)).ToUriString();
 
             JObject contentData = geekEndPoint.Put(url, requestContent);
         
